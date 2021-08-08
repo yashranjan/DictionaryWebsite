@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}
+<title>{{page_title}}</title>
+{% endblock %}
+
+{% block content %}
+<body>
+    <h1>Hello {{request.user}}</h1>
+    <form method="GET">
+        {{ form }}
+        <input type="submit" value="Find!">
+    </form>
+    {% if ansList %}
+    <p>For your searched word <b>{{ key|upper }}</b> </p>
+        {% for ans in ansList %}
+        <p>When it's a {{ans.partOfSpeech|upper}}</p>
+        <li>It's meaning is "{{ans.meaning}}"</li>
+        {% ifnotequal ans.antonym '[]' %}
+            <li>It's antonym is <b>{{ans.antonym|upper}}</b></li> 
+        {% else %}
+            <li>It's antonym is not found in this context!!</li>
+        {% endifnotequal %}
+        {% ifnotequal ans.synonym '[]' %}
+            <li>It's synonym is <b>{{ans.synonym|upper}}</b></li> 
+            {% else %}
+            <li>It's synonym is not found in this context!!</li>
+        {% endifnotequal %}
+        {% endfor %}
+    {% else %}
+    <p>Not found!!</p>
+    {% endif %}
+</body>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}
+<title>{{page_title}}</title>
+{% endblock %}
+
+{% block content %}
+<body>
+    <h1>Words registered till now!</h1>
+<ul>
+{% if wordsList %}
+    <p>Value    PartOfSpeech    Synonym     Antonym     Meaning</p>
+{% endif %}
+{% for word in wordsList %}
+    <li>{{ word.value }}    - {{ word.partOfSpeech}}    - {{ word.synonym}}       - {{word.antonym}}   - {{word.meaning}}</li>
+{% endfor %}
+</ul>
+
+</body>
+{% endblock %}
